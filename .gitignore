@@ -3,3 +3,7 @@ merged_labels_assets.csv
 .venv
 X_val.npy
 X_train.npy
+y_val.npy
+y_train.npy
+subset_train_idx.npy
+subset_val_idx.npy
