@@ -1,3 +1,5 @@
 merged_labels_assets.csv
 .vscode
 .venv
+X_val.npy
+X_train.npy
