@@ -23,11 +23,12 @@ if 'linux' in sys.platform:
 
     # NEW, ORGANIZED path definitions
     project_dir = "/home/shubham.agarwal_phd24/Galaxy_Classification"
-
+    home_dir = "/home/shubham.agarwal_phd24"
     # Define subdirectories
     data_dir = os.path.join(project_dir, "1_Data")
     model_dir = os.path.join(project_dir, "4_Models", "Model_1")
-
+    results_dir = os.path.join(project_dir, "5_Results", "Model_1")
+    checkpoint_dir = os.path.join(model_dir, "checkpoints")
     # Ensure model and checkpoint directories exist
     os.makedirs(os.path.join(model_dir, "checkpoints"), exist_ok=True)
 
@@ -45,10 +46,7 @@ if 'linux' in sys.platform:
     # Path to save the final model
     final_model_path = os.path.join(model_dir, 'final_stable_cnn_model.pth')
     
-    # Data is in the home directory
-    mapping_path = os.path.join(home_dir, "gz2_filename_mapping.csv")
-    labels_path  = os.path.join(home_dir, "gz2_hart16.csv")
-    images_dir   = os.path.join(home_dir, "images")
+   
     
     # Output file will be created inside the project folder
     out_merged_csv = os.path.join(project_dir, "merged_labels_assets.csv")
