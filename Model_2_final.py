@@ -296,8 +296,8 @@ if __name__ == '__main__':
     model_2.to(device)
 
     # Number of epochs to train for
-    num_epochs = 3
-        
+    num_epochs = 250
+
     # To store the training loss history
     train_loss_history = []
 
