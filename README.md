@@ -8,10 +8,53 @@ The dataset consists of 3 components.
 
 Below is the structure of directories and files as they were on the HPC which was used for training and testing the models:
 
-<img width="873" height="710" alt="image" src="https://github.com/user-attachments/assets/9cff01c7-c89c-4447-9c6b-58c391290c3c" />
+```plaintext
+.
+`-- Galaxy_Classification
+    |-- 1_Data  # Contains all raw and processed datasets.
+    |   |-- processed
+    |   |   `-- final_galaxy_test_set.csv
+    |   `-- raw
+    |       |-- gz2_filename_mapping.csv
+    |       |-- gz2_hart16.csv
+    |       `-- images  # Raw galaxy images (ignored by tree for brevity).
+    |-- 2_Scripts  # All Python scripts for model training and evaluation.
+    |   |-- Model_1_final.py
+    |   |-- Model_2_final.py
+    |   |-- Model_2_sub.py
+    |   |-- evaluate.py
+    |   |-- evaluate2.py
+    |   `-- inspect_batch.py
+    |-- 3_Jobs  # Shell scripts for submitting and running jobs on a server/HPC.
+    |   |-- eval_model_1.sh
+    |   |-- eval_model_2.sh
+    |   |-- run_debug_model_1.sh
+    |   |-- run_model_1.sh
+    |   `-- run_model_2.sh
+    |-- 4_Models  # Saved model weights and checkpoints.
+    |   |-- Model_1
+    |   |   `-- checkpoints
+    |   `-- Model_2
+    |       `-- checkpoints
+    |-- 5_Results  # Output files, logs, and performance plots from model runs.
+    |   |-- Model_1
+    |   |   |-- err_evaluate.log
+    |   |   |-- err_model_1.log
+    |   |   |-- final_performance_plot.png
+    |   |   |-- out_evaluate.log
+    |   |   |-- out_model_1.log
+    |   |   `-- train_loss_history.npy
+    |   `-- Model_2
+    |       |-- err_evaluate2.log
+    |       |-- err_model_2.log
+    |       |-- final_performance_plot.png
+    |       |-- out_evaluate2.log
+    |       |-- out_model_2.log
+    |       `-- train_loss_history.npy
+    |-- Conda_Envs   # Environment configuration files (e.g., .yml files).
+    `-- check_files.py  # Utility script to verify the project setup.
 
-<img width="788" height="620" alt="image" src="https://github.com/user-attachments/assets/a4130c2f-6512-4cd0-a4d4-1ddea1639633" />
-
-<img width="864" height="410" alt="image" src="https://github.com/user-attachments/assets/166a8ed5-260c-408a-875d-2ba321a0be42" />
+16 directories, 27 files
+```
 
 
