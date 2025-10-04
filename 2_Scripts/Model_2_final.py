@@ -111,7 +111,7 @@ def create_resnet18_model(num_outputs=37, pretrained=True):
     # 3. Replace the classifier head for our specific problem
     num_ftrs = model.fc.in_features
     model.fc = nn.Sequential(
-        nn.Linear(num_ftrs, num_outputs),
+        nn.Linear(num_ftrs, num_outputs), #512->37
         nn.Sigmoid()
     )
     
@@ -268,10 +268,10 @@ if __name__ == '__main__':
     plt.show()
 
 
-    # Create an instance of your Model 2
+    # Create an instance of Model 2
     model_2 = create_resnet18_model(pretrained=True)
     criterion = nn.MSELoss()
-    optimizer = optim.Adam(model_2.fc.parameters(), lr=1e-3, weight_decay=1e-5)
+    optimizer = optim.Adam(model_2.fc.parameters(), lr=1e-4, weight_decay=1e-5)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.1, patience=5, verbose=True)
 
     # Set the device (use GPU if available, otherwise CPU)
@@ -283,15 +283,13 @@ if __name__ == '__main__':
     print(model_2)
 
 
-    # Example of how to check which parameters are being trained
+    
     print("\n--- Trainable Parameters ---")
     for name, param in model_2.named_parameters():
         if param.requires_grad:
             print(name)
 
-    # --- 6. Model Training ---
-    print("\n--- Starting Model Training ---")
-    
+    print("\n--- Starting Training for Model 2 ---") 
     # Move the model to the selected device
     model_2.to(device)
 
