@@ -19,12 +19,9 @@ from torchvision import transforms
 # Paths
 if 'linux' in sys.platform:
     print(">>> Running on HPC (Linux detected)")
-    # Define paths for the HPC environment
 
-    # NEW, ORGANIZED path definitions
     project_dir = "/home/shubham.agarwal_phd24/Galaxy_Classification"
     home_dir = "/home/shubham.agarwal_phd24"
-    # Define subdirectories
     data_dir = os.path.join(project_dir, "1_Data")
     model_dir = os.path.join(project_dir, "4_Models", "Model_1")
     results_dir = os.path.join(project_dir, "5_Results", "Model_1")
@@ -46,14 +43,12 @@ if 'linux' in sys.platform:
     # Path to save the final model
     final_model_path = os.path.join(model_dir, 'final_stable_cnn_model.pth')
     
-   
-    
     # Output file will be created inside the project folder
     out_merged_csv = os.path.join(project_dir, "merged_labels_assets.csv")
 
-else: # Catches Windows ('win32'), macOS ('darwin'), etc.
+else: 
     print(">>> Running on Local PC")
-    # Define paths for your local Windows PC
+    # paths for local Windows PC
     data_dir = r"C:\Users\shubh\Downloads\MSc 3rd Sem\Galaxy_Data"
     project_dir = r"C:\Users\shubh\Downloads\MSc 3rd Sem\Galaxy_Morphology_Final"
     
@@ -137,12 +132,12 @@ tasks = {
 # Now, we need to finalize the target columns, extract the 37 debiased probability columns (make sure they sum to 1 within each task, but not necessarily across all 37 since some tasks are conditional) and save them in a NumPy array (shape: [num_samples, 37]).
 
 
-# --- 2. Data Loading and Merging ---
+# Data Loading and Merging
 df_map = pd.read_csv(mapping_path, dtype={"objid": str, "asset_id": str})
 df_lbl = pd.read_csv(labels_path, dtype={"dr7objid": str})
 df = pd.merge(df_map, df_lbl, left_on="objid", right_on="dr7objid", how="inner")
 
-# --- 3. CRITICAL FIX: Filter Missing Files BEFORE Splitting ---
+# Filtering out missing files before Splitting
 print("Checking for existing image files...")
 df["filename"] = df["asset_id"].astype(str) + ".jpg"
 df["file_path"] = df["filename"].apply(lambda f: os.path.join(images_dir, f))
@@ -216,7 +211,7 @@ val_transform = transforms.Compose([
 ])
 
 
-# --- 4. Prepare Labels and Perform Final Train/Test Split on Filtered Data ---
+# Preparing Labels and Performing Final Train/Test Split on Filtered Data
 target_cols = [col for col in df_filtered.columns if col.endswith("_debiased")]
 df_filtered[target_cols] = df_filtered[target_cols].fillna(0.0)
 Y_filtered = df_filtered[target_cols].to_numpy()
@@ -225,17 +220,17 @@ print("Performing final 80/20 train/test split...")
 # Use a single split for the entire filtered dataset
 msss = MultilabelStratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 
-# This gives you the indices for your final training and test sets
+# This gives the indices for the final training and test sets
 train_idx, test_idx = next(msss.split(np.zeros(len(Y_filtered)), Y_filtered))
 
-# Create the final train and test dataframes
+# Creates the final train and test dataframes
 train_df = df_filtered.iloc[train_idx]
 test_df  = df_filtered.iloc[test_idx]
 
 print(f"Created final train set with {len(train_df)} samples.")
 print(f"Created final test set with {len(test_df)} samples.")
 
-# --- Save the test set for later evaluation ---
+# Saving the test set for later evaluation
 test_df.to_csv(test_set_path, index=False)
 print("Held-out test set saved to 'final_galaxy_test_set.csv'")
 
@@ -265,9 +260,6 @@ class GalaxyDataset(Dataset):
 
 
 
-
-
-# (Make sure your transform classes and variables are defined before this point)
 train_dataset = GalaxyDataset(train_df, images_dir, target_cols, transform=train_transform)
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=8, pin_memory=True)
 
@@ -287,7 +279,7 @@ plt.show()
 # In[25]:
 
 
-class StableCNN(nn.Module): # Renamed for clarity
+class StableCNN(nn.Module): 
     def __init__(self):
         super(StableCNN, self).__init__()
 
@@ -343,7 +335,7 @@ model = StableCNN()
 
 
 
-# After creating your train_loader, before the training loop
+# After creating train_loader, before the training loop
 print("--- Checking a batch of data ---")
 inputs, labels = next(iter(train_loader))
 print(f"Inputs min: {inputs.min()}, max: {inputs.max()}")
@@ -352,18 +344,15 @@ print(f"Labels min: {labels.min()}, max: {labels.max()}")
 # Check if any values are nan
 print(f"Any nans in inputs? {torch.isnan(inputs).any()}")
 print(f"Any nans in labels? {torch.isnan(labels).any()}")
-print("---------------------------------")
+
 
 
 
 
 if __name__ == "__main__":
 
-    # --- 1. SETUP ---
-    # (Assuming model, train_loader, and val_loader are already defined)
-
     model = StableCNN()
-    # Define loss function and optimizer
+    # Defining loss function and optimizer
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=1e-5, weight_decay=1e-5)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.1, patience=5, verbose=True)
@@ -374,11 +363,11 @@ if __name__ == "__main__":
     print(f"Using device: {device}")
 
 
-    # --- FINAL TRAINING LOOP ---
-    num_epochs = 250 # Set the total number of epochs for final training
+    # FINAL TRAINING LOOP
+    num_epochs = 250 # Increased epochs for final training
     model.to(device)
 
-    # --- Save Training History ---
+    # Save Training History
     train_loss_history = []
 
     for epoch in range(num_epochs):
@@ -397,21 +386,21 @@ if __name__ == "__main__":
             running_train_loss += loss.item()
             train_progress_bar.set_postfix(loss=loss.item())
 
-        # --- Reporting & Saving ---
+        # Reporting & Saving
         avg_train_loss = running_train_loss / len(train_loader)
         train_loss_history.append(avg_train_loss)
         print(f"Epoch {epoch+1}/{num_epochs} -> Train Loss: {avg_train_loss:.4f}")
         
-        # Optional: Save a checkpoint every few epochs
+        # To save a checkpoint every few epochs
         if (epoch + 1) % 10 == 0:
             torch.save(model.state_dict(), checkpoint_path_template.format(epoch + 1))
-            print(f"--- Checkpoint saved for epoch {epoch+1} ---")
+            print(f"Checkpoint saved for epoch {epoch+1}")
 
 
     torch.save(model.state_dict(), final_model_path)
     np.save(train_history_path, np.array(train_loss_history))
 
-    print(f"\n--- Final model saved to {final_model_path} ---")
-    print(f"--- Training history saved to train_loss_history.npy ---")
-    print("\n--- Training Finished ---")
+    print(f"\nFinal model saved to {final_model_path}")
+    print(f"Training history saved to train_loss_history.npy")
+    print("\nTraining Finished")
 
