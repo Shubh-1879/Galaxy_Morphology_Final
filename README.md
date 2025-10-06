@@ -57,4 +57,5 @@ Below is the structure of directories and files as they were on the HPC which wa
 16 directories, 27 files
 ```
 
+<img width="3000" height="1800" alt="training_loss_comparison" src="https://github.com/user-attachments/assets/97816d20-3dc3-414a-af18-39893c42fc27" />
 
