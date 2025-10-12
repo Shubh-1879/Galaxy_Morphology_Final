@@ -59,3 +59,23 @@ For ease of understanding, the structure of directories and files which were use
 
 <img width="3000" height="1800" alt="training_loss_comparison" src="https://github.com/user-attachments/assets/97816d20-3dc3-414a-af18-39893c42fc27" />
 
+
+
+Besides this project, here are some of the fun images we took using Celestron NexStar 8SE (a telescope at Ashoka Physics lab) during coursework:
+
+<img width="650" height="691" alt="image" src="https://github.com/user-attachments/assets/7a4b4dfc-920c-42c6-8e95-a3f10ec36cb7" />
+
+<img width="786" height="564" alt="image" src="https://github.com/user-attachments/assets/2aaa0de0-e861-4772-8c15-6543d1e170b1" />
+
+<img width="791" height="579" alt="image" src="https://github.com/user-attachments/assets/fe778833-0b5d-499c-9d63-35d0b2358abb" />
+
+<img width="826" height="581" alt="image" src="https://github.com/user-attachments/assets/6a1c07af-9669-4376-92b9-749deca54065" />
+
+<img width="774" height="574" alt="image" src="https://github.com/user-attachments/assets/56c8c857-33ae-48b8-9820-c81243529eb4" />
+
+<img width="794" height="567" alt="image" src="https://github.com/user-attachments/assets/09799c00-0b5a-40ac-9e84-c813baa1ae1f" />
+
+
+
+
+
