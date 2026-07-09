@@ -1,10 +1,15 @@
 # Galaxy_Morphology_Final
 
+The purpose of this project was to classify images of extra-terrestrial bodies into categories posed by the Galaxy Zoo 2 project using CNNs. I collected a few images myself using a telescope (cool work, haha - see below), but the bulk of images were sourced as listed below.
 
 The dataset consists of 3 components.
 1. Images folder - contains 243,437 images of galaxies (Source: https://www.kaggle.com/datasets/jaimetrickz/galaxy-zoo-2-images)
 2. gz2_filename_mapping.csv - contains mappings from image file name to a unique ID (Source: https://www.kaggle.com/datasets/jaimetrickz/galaxy-zoo-2-images)
 3. gz2_hart16.csv - the primary dataset containing data on votes cast by citizen scientists (Source: https://data.galaxyzoo.org/) [Hart et al.(2016): https://mnras.oxfordjournals.org/content/461/4/3663]
+
+## Final report
+
+The final report for this project can be found here: https://drive.google.com/file/d/12QvdyD1S0XSNWscHeF3APO3RPx9Q873R/view?usp=sharing
 
 For ease of understanding, the structure of directories and files which were used for training and testing the models, as it was on the HPC, is given below:
 
