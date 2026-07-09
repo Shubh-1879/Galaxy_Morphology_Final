@@ -10,6 +10,7 @@ The dataset consists of 3 components.
 ## Final report
 
 The final report for this project can be found here: https://drive.google.com/file/d/12QvdyD1S0XSNWscHeF3APO3RPx9Q873R/view?usp=sharing
+You can write to me at shubham.agarwal_phd24@ashoka.edu.in or shubhamagarwal1879@gmail.com if you are not able to access it.
 
 ## Directory structure
 For ease of understanding, the structure of directories and files which were used for training and testing the models, as it was on the HPC, is given below:
