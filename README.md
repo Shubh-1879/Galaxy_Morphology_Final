@@ -11,6 +11,7 @@ The dataset consists of 3 components.
 
 The final report for this project can be found here: https://drive.google.com/file/d/12QvdyD1S0XSNWscHeF3APO3RPx9Q873R/view?usp=sharing
 
+## Directory structure
 For ease of understanding, the structure of directories and files which were used for training and testing the models, as it was on the HPC, is given below:
 
 ```plaintext
@@ -64,7 +65,7 @@ For ease of understanding, the structure of directories and files which were use
 
 <img width="3000" height="1800" alt="training_loss_comparison" src="https://github.com/user-attachments/assets/97816d20-3dc3-414a-af18-39893c42fc27" />
 
-
+## Fun images
 
 Besides this project, here are some of the fun images we took using Celestron NexStar 8SE (a telescope at Ashoka Physics lab) during coursework:
 
